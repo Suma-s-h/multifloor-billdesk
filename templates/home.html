@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+    <div class="jumbotron">
+        <h1>Welcome to Home Page</h1>
+        <br>
+       
+        {% if user.is_authenticated %}
+            {% for emp in employee %}
+               {{ emp.user_name }}  {{ emp.floor }}
+            {% endfor %}
+        {% endif %}
+
+        <div class="row">
+            {% for i in floors %}
+            <div class="card" style="width: 18rem;">
+
+                {% if i.floor_img %}
+                    <img src="{{ i.floor_img.url }}" class="card-img-top" alt="...">
+                {% else %}
+                    <p>no image</p>
+                {% endif %}
+
+                <div class="card-body">
+                    <h5 class="card-title"><a href="{{ i.id }}">{{ i.floor_name }}</a></h5>
+                    <p class="card-text">{{ i.description }}</p>
+                    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                </div>
+            </div>
+            <br>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}`

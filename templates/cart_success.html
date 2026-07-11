@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Cart Summary</h2>
+    {% if cart_items %}
+        <ul class="list-group">
+            {% for item in cart_items %}
+                <li class="list-group-item">
+                    <!-- <strong>{{ item.product_name }}</strong> — ₹{{ item.price }} × {{ item.quantity }} = ₹{{ item.total_price }}      |title -->           
+                     Product Name: {{ item.product_name }} <br>
+                     Price: ₹{{ item.price }} <br>
+                     Quantity: {{ item.quantity }} <br>
+                     Total Price: ₹{{ item.total_price }} <br>
+                </li>
+                <br>
+            {% endfor %}
+            
+        </ul>
+    {% else %}
+        <p>Your cart is empty.</p>
+    {% endif %}
+    <a href="{% url 'generate_bill' %}" class="btn btn-primary">Generate Bill</a>
+
+</div>
+{% endblock %}

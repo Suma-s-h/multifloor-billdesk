@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="jumbotron">
+        <h2>Products on {{ floor.floor_name }}</h2>
+
+        <div class="row">
+            {% for prod in product %}
+                <div class="card" style="width: 18rem; margin: 10px;">
+                    {% if prod.product_img %}
+                        <img src="{{ prod.product_img.url }}" class="card-img-top" alt="{{ prod.product_name }}">
+                    {% else %}
+                        <p>No Image</p>
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ prod.product_name }}</h5>
+                        <p class="card-text">Price: ₹{{ prod.price }}</p>
+                        <p class="card-text">Color: {{ prod.color }}</p>
+                        <p class="card-text">Fabric: {{ prod.fabric }}</p>
+                    </div>
+                </div>
+            {% empty %}
+                <p>No products available for this floor.</p>
+            {% endfor %}
+        </div>
+
+        <!-- Add to Cart Button -->
+        <div style="margin-top: 20px;">
+            {% if is_supervisor %}
+                <!-- <a href="{% url 'add_to_cart' %}" class="btn btn-success">Add to cart</a> -->
+                <a href="{% url 'add_to_cart' %}?floor_id={{ floor.id }}" class="btn btn-success">Add to cart</a>
+
+            {% else %}
+                <button type="submit" class="btn btn-success" disabled>Add to cart</button>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+{% endblock %}

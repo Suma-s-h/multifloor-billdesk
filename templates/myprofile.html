@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="jumbotron">
+        {% if user.is_authenticated %}
+            <h1>{{ user.username }}'s Profile</h1>
+            <p>Email : {{ user.email }}</p>
+            <p>Address : {{ user.userdetails.address }}</p>
+            <p>Street : {{ user.userdetails.street }}</p>
+            <p>City : {{ user.userdetails.city }}</p>
+            <p>State : {{ user.userdetails.state }}</p>
+            <p>Zipcode : {{ user.userdetails.zipcode }}</p>
+            <!-- <p>Image: </p> -->
+        {% endif %}
+        <a class="btn btn-primary" href="#">Update</a>
+    </div>
+</div>
+{% endblock %}
